@@ -6,6 +6,7 @@ import { auth } from "./lib/auth";
 import { authMiddleware } from "./middleware/auth";
 import profileRoutes from "./routes/profile";
 import mealsRoutes from "./routes/meals";
+import statsRoutes from "./routes/stats";
 
 const app = new Hono();
 
@@ -32,6 +33,7 @@ app.use("/api/*", authMiddleware());
 // API routes
 app.route("/api/profile", profileRoutes);
 app.route("/api/meals", mealsRoutes);
+app.route("/api/stats", statsRoutes);
 
 export default {
   port: 3000,

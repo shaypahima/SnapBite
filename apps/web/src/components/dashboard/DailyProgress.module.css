@@ -1,0 +1,23 @@
+.container {
+  text-align: center;
+}
+
+.calorieSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.macros {
+  margin-top: 8px;
+}
+
+.macroBar {
+  text-align: left;
+}
+
+.macroLabel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}

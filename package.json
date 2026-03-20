@@ -1,0 +1,13 @@
+{
+  "name": "snapbite",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "dev:api": "bun run --filter api dev",
+    "dev:web": "bun run --filter web dev",
+    "db:generate": "apps/api/node_modules/.bin/prisma generate --schema=apps/api/prisma/schema.prisma",
+    "db:push": "apps/api/node_modules/.bin/prisma db push --schema=apps/api/prisma/schema.prisma",
+    "db:studio": "apps/api/node_modules/.bin/prisma studio --schema=apps/api/prisma/schema.prisma"
+  }
+}

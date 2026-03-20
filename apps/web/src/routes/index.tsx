@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Typography } from "antd";
+import { PlusOutlined, LogoutOutlined } from "@ant-design/icons";
 import { signOut, useSession } from "@/lib/auth";
 
 const { Title, Text } = Typography;
@@ -12,9 +13,16 @@ function HomePage() {
       <Title>SnapBite</Title>
       <Text>Welcome, {session?.user?.name}</Text>
       <br />
-      <Button onClick={() => signOut()} style={{ marginTop: 16 }}>
-        Sign out
-      </Button>
+      <div style={{ marginTop: 24, display: "flex", gap: 12, justifyContent: "center" }}>
+        <Link to="/log">
+          <Button type="primary" icon={<PlusOutlined />} size="large">
+            Log a Meal
+          </Button>
+        </Link>
+        <Button icon={<LogoutOutlined />} onClick={() => signOut()}>
+          Sign out
+        </Button>
+      </div>
     </div>
   );
 }

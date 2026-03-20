@@ -12,3 +12,18 @@
 .row .number {
   flex: 1;
 }
+
+@media (max-width: 480px) {
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row .name {
+    flex: 1 1 100%;
+  }
+
+  .row .number {
+    flex: 1 1 calc(33% - 6px);
+    min-width: 0;
+  }
+}

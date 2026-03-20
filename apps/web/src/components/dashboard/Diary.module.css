@@ -1,0 +1,23 @@
+.mealItem {
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+.mealHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.foodItem {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 8px;
+}

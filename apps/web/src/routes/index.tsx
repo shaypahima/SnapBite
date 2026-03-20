@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, Card, Typography, DatePicker } from "antd";
-import { PlusOutlined, LeftOutlined, RightOutlined, SettingOutlined } from "@ant-design/icons";
+import { PlusOutlined, LeftOutlined, RightOutlined, SettingOutlined, HeartOutlined, SearchOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import dayjs from "dayjs";
@@ -37,6 +37,12 @@ function DashboardPage() {
         <div className={styles.headerActions}>
           <Link to="/log">
             <Button type="primary" icon={<PlusOutlined />}>Log Meal</Button>
+          </Link>
+          <Link to="/food-lookup">
+            <Button icon={<SearchOutlined />} />
+          </Link>
+          <Link to="/favorites">
+            <Button icon={<HeartOutlined />} />
           </Link>
           <Link to="/settings">
             <Button icon={<SettingOutlined />} />

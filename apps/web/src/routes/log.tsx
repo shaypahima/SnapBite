@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Tabs, Card, Typography } from "antd";
 import { EditOutlined, CameraOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import TextMealInput from "@/components/log/TextMealInput";
+import PhotoMealInput from "@/components/log/PhotoMealInput";
+import FormMealInput from "@/components/log/FormMealInput";
 import styles from "./log.module.css";
 
 const { Title } = Typography;
@@ -36,7 +38,7 @@ function LogPage() {
                   <CameraOutlined /> Photo
                 </span>
               ),
-              children: <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Coming soon</div>,
+              children: <PhotoMealInput onSaved={onMealSaved} />,
             },
             {
               key: "form",
@@ -45,7 +47,7 @@ function LogPage() {
                   <UnorderedListOutlined /> Form
                 </span>
               ),
-              children: <div style={{ padding: 24, textAlign: "center", color: "#999" }}>Coming soon</div>,
+              children: <FormMealInput onSaved={onMealSaved} />,
             },
           ]}
         />

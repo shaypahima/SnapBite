@@ -4,6 +4,7 @@ import { secureHeaders } from "hono/secure-headers";
 import { logger } from "./middleware/logger";
 import { auth } from "./lib/auth";
 import { authMiddleware } from "./middleware/auth";
+import profileRoutes from "./routes/profile";
 
 const app = new Hono();
 
@@ -26,6 +27,9 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 
 // Protected routes
 app.use("/api/*", authMiddleware());
+
+// API routes
+app.route("/api/profile", profileRoutes);
 
 export default {
   port: 3000,

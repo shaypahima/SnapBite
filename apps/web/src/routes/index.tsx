@@ -8,6 +8,7 @@ import api from "@/lib/axios";
 import { signOut } from "@/lib/auth";
 import DailyProgress from "@/components/dashboard/DailyProgress";
 import Diary from "@/components/dashboard/Diary";
+import TrendCharts from "@/components/dashboard/TrendCharts";
 import styles from "./index.module.css";
 
 const { Title } = Typography;
@@ -62,7 +63,11 @@ function DashboardPage() {
       )}
 
       <Card title="Meals" className={styles.section}>
-        <Diary meals={meals || []} />
+        <Diary meals={meals || []} dateStr={dateStr} />
+      </Card>
+
+      <Card title="Trends" className={styles.section}>
+        <TrendCharts />
       </Card>
     </div>
   );

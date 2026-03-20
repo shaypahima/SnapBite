@@ -16,6 +16,12 @@
   gap: 4px;
 }
 
+.mealActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .foodItem {
   display: flex;
   justify-content: space-between;

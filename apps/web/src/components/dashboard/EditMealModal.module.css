@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.row .name {
+  flex: 2;
+}
+
+.row .number {
+  flex: 1;
+}

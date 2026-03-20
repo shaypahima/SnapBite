@@ -1,0 +1,9 @@
+.container {
+  margin-top: 8px;
+}
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}

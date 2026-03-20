@@ -122,6 +122,78 @@ meals.post("/", async (c) => {
   return c.json(meal, 201);
 });
 
+// Update meal
+meals.put("/:id", async (c) => {
+  const user = getUser(c);
+  const mealId = c.req.param("id");
+  const { items } = await c.req.json();
+
+  // Verify ownership
+  const existing = await prisma.meal.findFirst({
+    where: { id: mealId, userId: user.id },
+  });
+  if (!existing) return c.json({ error: "Not found" }, 404);
+
+  // Delete old items and recreate
+  await prisma.mealItem.deleteMany({ where: { mealId } });
+
+  const meal = await prisma.meal.update({
+    where: { id: mealId },
+    data: {
+      items: {
+        create: await Promise.all(
+          items.map(async (item: any) => {
+            let food = await prisma.food.findFirst({
+              where: { name: { equals: item.name, mode: "insensitive" } },
+            });
+            if (!food) {
+              const qty = item.quantity || 100;
+              food = await prisma.food.create({
+                data: {
+                  name: item.name,
+                  caloriesPer100g: Math.round((item.calories / qty) * 100),
+                  proteinPer100g: Math.round((item.protein / qty) * 100 * 10) / 10,
+                  carbsPer100g: Math.round((item.carbs / qty) * 100 * 10) / 10,
+                  fatPer100g: Math.round((item.fat / qty) * 100 * 10) / 10,
+                },
+              });
+            }
+            return {
+              foodId: food.id,
+              quantity: item.quantity || 100,
+              calories: item.calories,
+              protein: item.protein,
+              carbs: item.carbs,
+              fat: item.fat,
+            };
+          })
+        ),
+      },
+    },
+    include: { items: { include: { food: true } } },
+  });
+
+  log.info({ mealId }, "Meal updated");
+  return c.json(meal);
+});
+
+// Delete meal
+meals.delete("/:id", async (c) => {
+  const user = getUser(c);
+  const mealId = c.req.param("id");
+
+  const existing = await prisma.meal.findFirst({
+    where: { id: mealId, userId: user.id },
+  });
+  if (!existing) return c.json({ error: "Not found" }, 404);
+
+  await prisma.mealItem.deleteMany({ where: { mealId } });
+  await prisma.meal.delete({ where: { id: mealId } });
+
+  log.info({ mealId }, "Meal deleted");
+  return c.json({ success: true });
+});
+
 // Get meals by date
 meals.get("/", async (c) => {
   const user = getUser(c);

@@ -30,3 +30,19 @@
 .section {
   margin-bottom: 16px;
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .headerActions {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}

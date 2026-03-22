@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   Form,
-  Input,
   InputNumber,
   Select,
   Button,
@@ -10,6 +9,7 @@ import {
   Radio,
   message,
 } from "antd";
+import { useQueryClient } from "@tanstack/react-query";
 import api from "@/lib/axios";
 import styles from "./onboarding.module.css";
 
@@ -32,6 +32,7 @@ const goalOptions = [
 function OnboardingPage() {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const unitPreference = Form.useWatch("unitPreference", form);
 
   const onFinish = async (values: Record<string, unknown>) => {
@@ -54,6 +55,7 @@ function OnboardingPage() {
       unitPreference: values.unitPreference,
     });
 
+    await queryClient.invalidateQueries({ queryKey: ["profile"] });
     message.success("Profile saved!");
     navigate({ to: "/" });
   };

@@ -20,7 +20,7 @@ function LoginPage() {
   const handleGoogleLogin = async () => {
     await signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: "http://localhost:5173/",
     });
   };
 
